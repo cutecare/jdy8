@@ -7,7 +7,7 @@ Author: evgeny.savitsky@gmail.com
 /**
  * Constructor
  */
-JDY8::JDY8(int rxPin = 3, int txPin = 4, int resetPin = 5, int baud = 115200)
+JDY8::JDY8(int rxPin = 3, int txPin = 4, int resetPin = 5, long baud = 115200)
 {
 	bleRxPin = rxPin;
 	bleTxPin = txPin;
@@ -23,7 +23,7 @@ void JDY8::configure(const char * bleName, int io1 = 0, int io2 = 0, int io3 = 0
 	bleSerial.begin(bleBaud);
 	
 	sendCommand(&bleSerial, "AT+RESTORE");
-	delay(500);
+	delay(1000);
 
 	char text[64] = "";
 	sprintf(text, "AT+NAME%s", bleName);
@@ -32,6 +32,7 @@ void JDY8::configure(const char * bleName, int io1 = 0, int io2 = 0, int io3 = 0
 	sendCommand(&bleSerial, "AT+HOSTEN3");
 	sendCommand(&bleSerial, "AT+CLSSE0");
 	sendCommand(&bleSerial, "AT+RST");
+	delay(500);
 	sendCommand(&bleSerial, "AT+POWR0");      // max RF power
 	sendCommand(&bleSerial, "AT+ADVEN1");     // advertising enabled
 	sendCommand(&bleSerial, "AT+ADVIN1");     // setup advertising interval
@@ -178,6 +179,6 @@ void JDY8::wakeUpBLE()
 }
 
 void JDY8::sendCommand(const SoftwareSerial * bleSerial, const char * data) {
-	delay(200);
+	delay(250);
 	bleSerial->print(data);
 }

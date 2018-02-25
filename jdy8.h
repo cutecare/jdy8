@@ -15,7 +15,7 @@ Author: evgeny.savitsky@gmail.com
 
 class JDY8 {
   public:
-	  JDY8(int rxPin = 3, int txPin = 4, int resetPin = 5, int baud = 115200);
+	  JDY8(int rxPin = 3, int txPin = 4, int resetPin = 5, long baud = 115200);
 	  void configure(const char * bleName, int io1 = 0, int io2 = 0, int io3 = 0, int io4 = 0);
 	  void setData(unsigned int minor = 0, unsigned int major = 0, short humidity = 0, short temperature = 0, short battery = 0, bool autosleep = true);
 	  void major(unsigned int value, bool autosleep = true);
@@ -31,7 +31,7 @@ class JDY8 {
 	  int bleTxPin = 0;
 	  int bleRxPin = 0;
 	  int bleResetPin = 0;
-	  int bleBaud = 0;
+	  long bleBaud = 0;
 };
 
 #endif
