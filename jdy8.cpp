@@ -7,19 +7,19 @@ Author: evgeny.savitsky@gmail.com
 /**
  * Constructor
  */
-JDY8::JDY8(int txPin = 3, int rxPin = 4, int resetPin = 5, int baud = 115200)
+JDY8::JDY8(int rxPin = 3, int txPin = 4, int resetPin = 5, int baud = 115200)
 {
-	bleTxPin = txPin;
 	bleRxPin = rxPin;
+	bleTxPin = txPin;
 	bleResetPin = resetPin;
 	bleBaud = baud;
 }
 
 void JDY8::configure(const char * bleName, int io1 = 0, int io2 = 0, int io3 = 0, int io4 = 0)
 {
-	pinMode(bleTxPin, OUTPUT);
+	pinMode(bleRxPin, OUTPUT);
 	
-	SoftwareSerial bleSerial(bleRxPin, bleTxPin);
+	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
 	
 	sendCommand(&bleSerial, "AT+RESTORE");
@@ -47,15 +47,15 @@ void JDY8::configure(const char * bleName, int io1 = 0, int io2 = 0, int io3 = 0
 	sprintf(text, "AT+PIO4%d", io4);
 	sendCommand(&bleSerial, text);
 
-	pinMode(bleTxPin, INPUT);
+	pinMode(bleRxPin, INPUT);
 }
 
 void JDY8::setData(unsigned int minor = 0, unsigned int major = 0, short humidity = 0, short temperature = 0, short battery = 0, bool autosleep = true)
 {
-	pinMode(bleTxPin, OUTPUT);
+	pinMode(bleRxPin, OUTPUT);
 	wakeUpBLE();
 
-	SoftwareSerial bleSerial(bleRxPin, bleTxPin);
+	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
 
 	char buff[32] = "";
@@ -73,15 +73,15 @@ void JDY8::setData(unsigned int minor = 0, unsigned int major = 0, short humidit
 		sendCommand(&bleSerial, "AT+SLEEP1");
 	}
 
-	pinMode(bleTxPin, INPUT);
+	pinMode(bleRxPin, INPUT);
 }
 
 void JDY8::major(unsigned int value, bool autosleep = true)
 {
-	pinMode(bleTxPin, OUTPUT);
+	pinMode(bleRxPin, OUTPUT);
 	wakeUpBLE();
 
-	SoftwareSerial bleSerial(bleRxPin, bleTxPin);
+	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
 
 	char buff[32] = "";
@@ -91,15 +91,15 @@ void JDY8::major(unsigned int value, bool autosleep = true)
 		sendCommand(&bleSerial, "AT+SLEEP1");
 	}
 
-	pinMode(bleTxPin, INPUT);
+	pinMode(bleRxPin, INPUT);
 }
 
 void JDY8::minor(unsigned int value, bool autosleep = true)
 {
-	pinMode(bleTxPin, OUTPUT);
+	pinMode(bleRxPin, OUTPUT);
 	wakeUpBLE();
 
-	SoftwareSerial bleSerial(bleRxPin, bleTxPin);
+	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
 
 	char buff[32] = "";
@@ -109,15 +109,15 @@ void JDY8::minor(unsigned int value, bool autosleep = true)
 		sendCommand(&bleSerial, "AT+SLEEP1");
 	}
 
-	pinMode(bleTxPin, INPUT);
+	pinMode(bleRxPin, INPUT);
 }
 
 void JDY8::humidity(short value, bool autosleep = true)
 {
-	pinMode(bleTxPin, OUTPUT);
+	pinMode(bleRxPin, OUTPUT);
 	wakeUpBLE();
 
-	SoftwareSerial bleSerial(bleRxPin, bleTxPin);
+	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
 
 	char buff[32] = "";
@@ -127,15 +127,15 @@ void JDY8::humidity(short value, bool autosleep = true)
 		sendCommand(&bleSerial, "AT+SLEEP1");
 	}
 
-	pinMode(bleTxPin, INPUT);
+	pinMode(bleRxPin, INPUT);
 }
 
 void JDY8::temperature(short value, bool autosleep = true)
 {
-	pinMode(bleTxPin, OUTPUT);
+	pinMode(bleRxPin, OUTPUT);
 	wakeUpBLE();
 
-	SoftwareSerial bleSerial(bleRxPin, bleTxPin);
+	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
 
 	char buff[32] = "";
@@ -145,15 +145,15 @@ void JDY8::temperature(short value, bool autosleep = true)
 		sendCommand(&bleSerial, "AT+SLEEP1");
 	}
 
-	pinMode(bleTxPin, INPUT);
+	pinMode(bleRxPin, INPUT);
 }
 
 void JDY8::battery(short value, bool autosleep = true)
 {
-	pinMode(bleTxPin, OUTPUT);
+	pinMode(bleRxPin, OUTPUT);
 	wakeUpBLE();
 
-	SoftwareSerial bleSerial(bleRxPin, bleTxPin);
+	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
 
 	char buff[32] = "";
@@ -163,7 +163,7 @@ void JDY8::battery(short value, bool autosleep = true)
 		sendCommand(&bleSerial, "AT+SLEEP1");
 	}
 
-	pinMode(bleTxPin, INPUT);
+	pinMode(bleRxPin, INPUT);
 }
 
 void JDY8::wakeUpBLE() 
