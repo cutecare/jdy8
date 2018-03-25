@@ -54,7 +54,9 @@ void JDY8::configure(const char * bleName, int io1 = 0, int io2 = 0, int io3 = 0
 void JDY8::setIOPin(int index, int value, bool autosleep)
 {
 	pinMode(bleRxPin, OUTPUT);
-	wakeUpBLE();
+	if ( autosleep ) {
+		wakeUpBLE();
+	}
 
 	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
@@ -72,7 +74,9 @@ void JDY8::setIOPin(int index, int value, bool autosleep)
 void JDY8::setData(unsigned int minor = 0, unsigned int major = 0, short humidity = 0, short temperature = 0, short battery = 0, bool autosleep = true)
 {
 	pinMode(bleRxPin, OUTPUT);
-	wakeUpBLE();
+	if ( autosleep ) {
+		wakeUpBLE();
+	}
 
 	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
@@ -98,7 +102,9 @@ void JDY8::setData(unsigned int minor = 0, unsigned int major = 0, short humidit
 void JDY8::major(unsigned int value, bool autosleep = true)
 {
 	pinMode(bleRxPin, OUTPUT);
-	wakeUpBLE();
+	if ( autosleep ) {
+		wakeUpBLE();
+	}
 
 	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
@@ -116,7 +122,9 @@ void JDY8::major(unsigned int value, bool autosleep = true)
 void JDY8::minor(unsigned int value, bool autosleep = true)
 {
 	pinMode(bleRxPin, OUTPUT);
-	wakeUpBLE();
+	if ( autosleep ) {
+		wakeUpBLE();
+	}
 
 	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
@@ -134,7 +142,9 @@ void JDY8::minor(unsigned int value, bool autosleep = true)
 void JDY8::humidity(short value, bool autosleep = true)
 {
 	pinMode(bleRxPin, OUTPUT);
-	wakeUpBLE();
+	if ( autosleep ) {
+		wakeUpBLE();
+	}
 
 	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
@@ -152,7 +162,9 @@ void JDY8::humidity(short value, bool autosleep = true)
 void JDY8::temperature(short value, bool autosleep = true)
 {
 	pinMode(bleRxPin, OUTPUT);
-	wakeUpBLE();
+	if ( autosleep ) {
+		wakeUpBLE();
+	}
 
 	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
@@ -170,7 +182,9 @@ void JDY8::temperature(short value, bool autosleep = true)
 void JDY8::battery(short value, bool autosleep = true)
 {
 	pinMode(bleRxPin, OUTPUT);
-	wakeUpBLE();
+	if ( autosleep ) {
+		wakeUpBLE();
+	}
 
 	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
 	bleSerial.begin(bleBaud);
