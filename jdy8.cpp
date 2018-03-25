@@ -51,6 +51,24 @@ void JDY8::configure(const char * bleName, int io1 = 0, int io2 = 0, int io3 = 0
 	pinMode(bleRxPin, INPUT);
 }
 
+void JDY8::setIOPin(int index, int value, bool autosleep)
+{
+	pinMode(bleRxPin, OUTPUT);
+	wakeUpBLE();
+
+	SoftwareSerial bleSerial(bleTxPin, bleRxPin);
+	bleSerial.begin(bleBaud);
+
+	char buff[32] = "";
+	sprintf(buff, "AT+PIO%d%d", index, value);
+	sendCommand(&bleSerial, buff);
+	if (autosleep) {
+		sendCommand(&bleSerial, "AT+SLEEP1");
+	}
+
+	pinMode(bleRxPin, INPUT);
+}
+
 void JDY8::setData(unsigned int minor = 0, unsigned int major = 0, short humidity = 0, short temperature = 0, short battery = 0, bool autosleep = true)
 {
 	pinMode(bleRxPin, OUTPUT);
