@@ -17,6 +17,7 @@ class JDY8 {
   public:
 	  JDY8(int rxPin = 3, int txPin = 4, int resetPin = 5, long baud = 115200);
 	  void configure(const char * bleName, int io1 = 0, int io2 = 0, int io3 = 0, int io4 = 0);
+	  void setPin(int index, int value);
 	  void setData(unsigned int minor = 0, unsigned int major = 0, short humidity = 0, short temperature = 0, short battery = 0, bool autosleep = true);
 	  void major(unsigned int value, bool autosleep = true);
 	  void minor(unsigned int value, bool autosleep = true);
